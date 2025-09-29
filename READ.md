@@ -1,40 +1,20 @@
-# Lab 3
+A) INNER JOIN - Users who have at least one role
+Returns only users who have at least one assigned role, combining user info with their role(s). Users without roles are excluded.
 
-This project is a simple authentication system using **Node.js, Express, MySQL, JWT, and bcrypt**.  
-It covers signup, login, profile access, and logout with token revocation for secure authentication.
+B) LEFT JOIN - All users (with profile info if present)
+Returns all users, including those without profiles. If a user doesn’t have a profile, the profile columns show NULL.
 
- Project Setup
+C) RIGHT JOIN - Keep all roles even if unassigned
+Returns all roles, including those not assigned to any user. Users without roles appear as NULL.
 
-1. Clone this repository or download the files.
-2. Create a MySQL database named `lab_auth`.
-3. Run the following SQL to create tables:
+D) FULL OUTER JOIN 
+Emulates a FULL OUTER JOIN in MySQL, showing all users and all profiles, even if some users don’t have profiles and some profiles don’t have matching users.
 
-sql:
+E) CROSS JOIN - 
+Returns all possible combinations of users and roles. Each user is paired with every role regardless of assignments.
 
-CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(100) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL
-);
+F) SELF JOIN - 
+Shows referral relationships by joining the users table to itself via the referrals table, listing who referred whom and when.
 
-CREATE TABLE revoked_tokens (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  jti VARCHAR(255) NOT NULL,
-  expiresAt DATETIME NOT NULL
-);
-
-Install dependencies:
-
-Endpoint List
-POST	/api/auth/signup - Register a new user (username+pwd)	
-POST	/api/auth/login	- Login, get JWT token	
-GET	/api/auth/profile	- Get user profile (requires token)	
-POST	/api/auth/logout - Logout, revoke token	
-GET	/api/health	- Health check	
-
-TECH STACK:
-Node.js + Express
-MySQL (via XAMPP or CLI)
-bcrypt (password hashing)
-JWT (authentication)
-Postman (testing)
+G) Bonus - 
+Shows each user’s latest login if available. Users who never logged in still appear with NULL login info.
